@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<head>
+	<title>Template for JS Loader</title>
+	<!--jsloader include 1: styles-->
+	<style>
+		#spinnerPosition{}#spinner { position: relative; font-size: 20px; }#spinner b { position:absolute; }#spinner .b7 { top:00px; left:20px; }#spinner .b6 { top:03px; left:27px; }#spinner .b5 { top:10px; left:30px; }#spinner .b4 { top:17px; left:27px; }#spinner .b3 { top:20px; left:20px; }#spinner .b2 { top:17px; left:13px; }#spinner .b1 { top:10px; left:09px; }#spinner .b0 { top:03px; left:13px; }#spinner .o0 { opacity: 0.8; filter: alpha(opacity=80); }#spinner .o1 { opacity: 0.7; filter: alpha(opacity=70); }#spinner .o2 { opacity: 0.6; filter: alpha(opacity=60); }#spinner .o3 { opacity: 0.5; filter: alpha(opacity=50); }#spinner .o4 { opacity: 0.4; filter: alpha(opacity=40); }#spinner .o5 { opacity: 0.3; filter: alpha(opacity=30); }#spinner .o6 { opacity: 0.2; filter: alpha(opacity=20); }#spinner .o7 { opacity: 0.1; filter: alpha(opacity=10); }.center{text-align:center;}.imgResp{ max-width: 100%; }
+	</style>
+	<!--end of include 1-->
+</head>
+<body>
+
+	<!--jsloader include 2: html elements-->
+	<div id="spinnerPosition" style="width: 50px; text-align: center; margin: 0px auto;z-index:10;"><br />Loading...<div id="spinner"></div><br />&nbsp;</div>
+	<!--end of include 2-->
+
+
+	<!--jsloader include 3: js to start spinning-->
+	<script type="text/javascript">
+	var d;
+	(function(a,b,c){d=setInterval(function(){for(b=0;b<8;c||(a.innerHTML+='<b>•</b>'),a.childNodes[b].className='b'+b+' o'+(++b-~c)%8){}c=-~c;},150);
+	})(document.getElementById('spinner'),1,0);
+	</script>
+	<!--end of include 3-->
+
+
+	<!--jsloader include 4: js to stop spinning. change accordingly if listening for other events to stop spinning-->
+	<script type="text/javascript">
+	(function(html_element, event_name, event_function){if(html_element.attachEvent){ html_element.attachEvent("on" + event_name, function() {event_function.call(html_element);}); }else if(html_element.addEventListener){ html_element.addEventListener(event_name, event_function, false);}})(window,'load',function(){
+		//After page is loaded, Stop Spinner and hide. If your connection is too fast and you cannot even see the spinner, you can comment out the line below to see how the spinner effect looks like on slow connections.
+		clearInterval(d);	try{document.getElementById('spinnerPosition').style.display="none"; document.getElementById('content').style.display="block";}catch(ex){}
+	});
+	</script>
+	<!--end of include 4-->
+
+
+	<div id="content" class='center' style='display:none;'>
+		<!-- CONTENT GOES HERE-->
+		<h1>JS Loader</h1>
+		If your Internet connection is very fast, you may not see the loading spinner on top before you see the picture below.<br />
+		<a href="https://github.com/u080041/jsLoader/">Code on Github</a><br />
+		<img src="smokey.jpg" class="imgResp" alt="image to simulate slow loading"/><!-- used with permission: http://smokey.simplelittle.com -->
+		<!-- Loading spinner will only be seen if content takes long enough to load. On localhost, you will usually see the content quite quickly, and may not even see the loading spinner. -->
+		
+		<!-- END OF CONTENT-->
+	</div>
+
+	<!-- All other heavy includes such as js and css files should be below, so that spinner will show. CSS can be loaded using JavaScript. (separate topic :)) -->
+</body>
+</html>
